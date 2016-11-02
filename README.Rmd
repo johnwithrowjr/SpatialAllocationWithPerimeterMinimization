@@ -1,0 +1,70 @@
+---
+title: "Spatial Allocation with Perimiter Minimization"
+author: "John Withrow, PhD"
+date: "November 1, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Executive Summary
+
+
+
+## Analytical Context
+### Session Information
+```{r sessionInfo}
+sessionInfo()
+```
+### Setting of Random Number Seed
+```{r rnd}
+set.seed(19690828)
+```
+### Set Working Directory
+```{r setwd}
+setwd("C:\\Users\\John\\Documents\\SpatialAllocationWithPerimeterMinimization")
+```
+
+***
+
+## Analytical Process
+### Data Acquisition
+Training and testing data are already divided into two files, downloadable from two different sources:
+
+
+### Manual Pre-Processing
+In both downloaded files, the title of the first column is missing.  It was added as "num" for both files, as it appears in both to be a simple enumeration column.
+
+### Reading and Pre-processing of Data
+The following pre-processing of data took place:
+1. All columns after the seventh and before the last were set to type numeric
+2. It was found that any column that had missing data had at most a few hundred records without missing data (out of over 13,000 total records).  These fields were removed from the study, reducing the total number of columns from 154 to 60.
+```{r data}
+m <- 1000
+n <- 1000
+pop <- matrix(data=0,nrow=m,ncol=n)
+occ <- matrix(data=0,nrow=m,ncol=n)
+bound <- matrix(data=0,nrow=(m+1)*(n+1),ncol=p)
+s <- sample(seq(1,m*n))
+row <- function(x,m) {x %/% m}
+col <- function(x,m) {x %% m}
+flip <- function(x,m) {bound[row(x,m),col(x,m)] <- (bound[row(x,m),col(x,m)]+1) %% 2}
+occupy <- function(x,m,i)
+{
+  occ[row(x,m),col(x,m)] = i
+  flip(bound[row(x,m),col(x,m)])
+  flip(bound[row(x,m),col(x,m)+1])
+  flip(bound[row(x,m)+1,col(x,m)])
+  flip(bound[row(x,m)+1,col(x,m)+1])
+}
+isAdjacent <- function(x1,x2,m)
+```
+
+### Dimensionality Reduction
+
+
+***
+
+#### End of Analysis
