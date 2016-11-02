@@ -1,0 +1,2 @@
+# SpatialAllocationWithPerimeterMinimization
+Spatial Allocation with Perimeter Minimization
